@@ -111,36 +111,49 @@ class MainActivity : AppCompatActivity() {
                 .subscribe({
                     var status = it.status
                     if (status == 0) {
-                        when (state) {
-                            0 -> {
-                                myAdapter!!.setNewData(it.data)
-                                mRefreshLayout.isRefreshing = false
-                            }
-                            1 -> {
-                                Toast.makeText(this, "刷新成功！", Toast.LENGTH_SHORT).show()
-                                Collections.shuffle(it.data)
-                                myAdapter!!.setNewData(it.data)
-                                mRefreshLayout.isRefreshing = false
-                            }
-                            2 -> {
-                                Thread(Runnable {
-                                    Thread.sleep(800)
-                                    runOnUiThread {
-                                        myAdapter!!.addData(it.data)
-                                        myAdapter!!.loadMoreComplete()
-                                    }
-                                }).start()
-
-                            }
-                        }
+                        setData(state, it)
                     } else {
-                        mRefreshLayout.isRefreshing = false
-                        Toast.makeText(this, "获取数据失败！", Toast.LENGTH_SHORT).show()
+                        showError()
                     }
                 }, {
-                    mRefreshLayout.isRefreshing = false
-                    Toast.makeText(this, "获取数据失败！", Toast.LENGTH_SHORT).show()
+                    showError()
                 })
+    }
+
+    /**
+     * 获取数据失败
+     */
+    private fun showError() {
+        mRefreshLayout.isRefreshing = false
+        Toast.makeText(this, "获取数据失败！", Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * 成功获取数据
+     */
+    private fun setData(state: Int, it:WeaponModelnfo) {
+        when (state) {
+            0 -> {
+                myAdapter!!.setNewData(it.data)
+                mRefreshLayout.isRefreshing = false
+            }
+            1 -> {
+                Toast.makeText(this, "刷新成功！", Toast.LENGTH_SHORT).show()
+                Collections.shuffle(it.data)
+                myAdapter!!.setNewData(it.data)
+                mRefreshLayout.isRefreshing = false
+            }
+            2 -> {
+                Thread(Runnable {
+                    Thread.sleep(800)
+                    runOnUiThread {
+                        myAdapter!!.addData(it.data)
+                        myAdapter!!.loadMoreComplete()
+                    }
+                }).start()
+
+            }
+        }
     }
 
     /***************************
