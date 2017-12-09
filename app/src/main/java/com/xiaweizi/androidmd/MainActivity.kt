@@ -7,10 +7,10 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.support.v7.widget.Toolbar
+import android.support.v7.widget.*
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -52,11 +52,40 @@ class MainActivity : AppCompatActivity() {
         mIvHead = nav.getHeaderView(0).findViewById(R.id.iv_head)
     }
 
-    private fun init() {
-        myAdapter = MyAdapter()
+    private fun staggeredVertical() {
         myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    }
+
+    private fun staggeredHorizontal() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+        mRecyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL)
+    }
+
+    private fun linearHorizontal() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SCALEIN)
+        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+    }
+
+    private fun linearVertical() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
+        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+    }
+
+    private fun gridVertical() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_RIGHT)
+        mRecyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
+    }
+
+    private fun gridHorizontal() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SCALEIN)
+        mRecyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun init() {
+        myAdapter = MyAdapter()
         mRecyclerView.adapter = myAdapter
+        staggeredVertical()
         mRefreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN)
         setSupportActionBar(mToolbar)
         Glide.with(this).load(Contants.HEAD_IMAGE_URL)
@@ -135,4 +164,26 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
+    /***************************
+     * 创建菜单
+     */
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    /***************************
+     * 给菜单设置点击事件
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.staggeredHorizontal -> staggeredHorizontal()
+            R.id.staggeredVertical -> staggeredVertical()
+            R.id.linearHorizontal -> linearHorizontal()
+            R.id.linearVertical -> linearVertical()
+            R.id.gridVertical -> gridVertical()
+            R.id.gridHorizontal -> gridHorizontal()
+        }
+        return true
+    }
 }

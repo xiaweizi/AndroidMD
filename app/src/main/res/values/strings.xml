@@ -2,4 +2,10 @@
     <string name="app_name">AndroidMD</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="linearhorizontal">linearHorizontal</string>
+    <string name="linearvertical">linearVertical</string>
+    <string name="gridhorizontal">gridHorizontal</string>
+    <string name="gridvertical">gridVertical</string>
+    <string name="staggeredhorizontal">staggeredHorizontal</string>
+    <string name="staggeredvertical">staggeredVertical</string>
 </resources>
