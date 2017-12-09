@@ -53,35 +53,6 @@ class MainActivity : AppCompatActivity() {
         mIvHead = nav.getHeaderView(0).findViewById(R.id.iv_head)
     }
 
-    private fun staggeredVertical() {
-        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
-        mRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-    }
-
-    private fun staggeredHorizontal() {
-        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
-        mRecyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL)
-    }
-
-    private fun linearHorizontal() {
-        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SCALEIN)
-        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
-    }
-
-    private fun linearVertical() {
-        myAdapter!!.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
-        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-    }
-
-    private fun gridVertical() {
-        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_RIGHT)
-        mRecyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
-    }
-
-    private fun gridHorizontal() {
-        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SCALEIN)
-        mRecyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.HORIZONTAL, false)
-    }
 
     private fun init() {
         myAdapter = MyAdapter()
@@ -193,5 +164,49 @@ class MainActivity : AppCompatActivity() {
             R.id.gridHorizontal -> gridHorizontal()
         }
         return true
+    }
+
+
+    /**
+     * 垂直瀑布流
+     */
+    private fun staggeredVertical() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+        mRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    }
+    /**
+     * 水平瀑布流
+     */
+    private fun staggeredHorizontal() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+        mRecyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL)
+    }
+    /**
+     * 水平列表
+     */
+    private fun linearHorizontal() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SCALEIN)
+        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+    }
+    /**
+     * 垂直列表
+     */
+    private fun linearVertical() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
+        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+    }
+    /**
+     * 水平宫格
+     */
+    private fun gridVertical() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_RIGHT)
+        mRecyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
+    }
+    /**
+     * 垂直宫格
+     */
+    private fun gridHorizontal() {
+        myAdapter!!.openLoadAnimation(BaseQuickAdapter.SCALEIN)
+        mRecyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.HORIZONTAL, false)
     }
 }
