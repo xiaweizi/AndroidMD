@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="简介">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_news"
+                    android:title="枪械简介" />
+                <item
+                    android:id="@+id/nav_duanzi"
+                    android:title="人物简介" />
+                <item
+                    android:id="@+id/nav_today_of_history"
+                    android:title="配件简介" />
+                <item
+                    android:id="@+id/nav_robot"
+                    android:title="空投简介" />
+            </group>
+        </menu>
+
+    </item>
+
+
+    <item android:title="攻略">
+        <menu>
+            <item
+                android:id="@+id/nav_clear_cache"
+                android:title="雾天攻略" />
+            <item
+                android:id="@+id/nav_version_update"
+                android:title="傍晚攻略" />
+            <item
+                android:id="@+id/nav_change_theme"
+                android:title="黑夜攻略" />
+            <item
+                android:id="@+id/nav_day_night"
+                android:title="白天攻略"
+                />
+        </menu>
+    </item>
+
+</menu>
