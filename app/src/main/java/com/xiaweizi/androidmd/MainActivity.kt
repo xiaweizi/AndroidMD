@@ -17,6 +17,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
+import com.chad.library.adapter.base.listener.OnItemLongClickListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -111,6 +112,13 @@ class MainActivity : AppCompatActivity() {
                     Log.i("itemTouch", adapter.data[position].toString())
                 }
             }
+        })
+        mRecyclerView.addOnItemTouchListener(object : OnItemLongClickListener() {
+            override fun onSimpleItemLongClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
+                Toast.makeText(this@MainActivity, "删除", Toast.LENGTH_SHORT)
+                adapter!!.notifyItemRemoved(position)
+            }
+
         })
         myAdapter!!.setOnLoadMoreListener {
             getData(2)
