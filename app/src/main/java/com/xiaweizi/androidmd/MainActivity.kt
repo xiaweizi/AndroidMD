@@ -42,12 +42,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
-        init()
+        initData()
         initListener()
         mRefreshLayout.isRefreshing = true
         getData(0)
     }
 
+    /**
+     * 初始化 view
+     */
     private fun initView() {
         mRecyclerView = findViewById(R.id.recyclerView)
         mRefreshLayout = findViewById(R.id.refresh_layout)
@@ -58,13 +61,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun init() {
+    /**
+     * 初始化数据
+     */
+    private fun initData() {
         myAdapter = MyAdapter()
         mRecyclerView.adapter = myAdapter
         staggeredVertical()
         mRefreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN)
         setSupportActionBar(mToolbar)
-        Glide.with(this).load(Contants.HEAD_IMAGE_URL)
+        Glide.with(this).load(Constants.HEAD_IMAGE_URL)
                 .into(mIvHead)
         //给打开左侧菜单的按钮是指特效
         mToggle = ActionBarDrawerToggle(this@MainActivity,
@@ -77,6 +83,9 @@ class MainActivity : AppCompatActivity() {
         mItemTouchHelper.attachToRecyclerView(mRecyclerView)
     }
 
+    /**
+     * 初始化 listener
+     */
     private fun initListener() {
         mRefreshLayout.setOnRefreshListener {
             mRefreshLayout.isRefreshing = true
@@ -100,9 +109,9 @@ class MainActivity : AppCompatActivity() {
      * 1 下拉刷新
      * 2 上啦加载更多
      */
-    fun getData(state: Int) {
+    private fun getData(state: Int) {
         MyClient.instance
-                .create(MyService::class.java, Contants.MASTER_URL)
+                .create(MyService::class.java, Constants.MASTER_URL)
                 .weaponInfo
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

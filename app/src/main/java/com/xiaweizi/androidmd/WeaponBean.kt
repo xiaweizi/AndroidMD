@@ -6,7 +6,7 @@ package com.xiaweizi.androidmd
  *     class  : com.xiaweizi.androidmd.WeaponBean
  *     e-mail : 1012126908@qq.com
  *     time   : 2017/12/08
- *     desc   :
+ *     desc   : 获取武器信息的 bean 和 modelInfo
  * </pre>
  */
 data class WeaponBean(var id: Int, var name: String, var content: String, var imageUrl: String)

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
  * class  : com.xiaweizi.androidmd.MyClient
  * e-mail : 1012126908@qq.com
  * time   : 2017/12/08
- * desc   :
+ * desc   : 用于请求网络的客户端
 </pre> *
  */
 
