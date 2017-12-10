@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
      * 2 上啦加载更多
      */
     fun getData(state: Int) {
-        MyClient.getInstance()
+        MyClient.instance
                 .create(MyService::class.java, Contants.MASTER_URL)
                 .weaponInfo
                 .subscribeOn(Schedulers.io())
