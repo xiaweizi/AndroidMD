@@ -1,5 +1,6 @@
 package com.xiaweizi.androidmd
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -9,7 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -94,7 +94,10 @@ class MainActivity : AppCompatActivity() {
         mRecyclerView.addOnItemTouchListener(object : OnItemClickListener() {
             override fun onSimpleItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
                 if (adapter is MyAdapter) {
-                    Log.i("itemTouch", adapter.data[position].toString())
+                    val weaponBean = adapter.data[position]
+                    val intent = Intent(this@MainActivity, WeaponDetailActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_WEAPON_BEAN, weaponBean)
+                    startActivity(intent)
                 }
             }
         })
