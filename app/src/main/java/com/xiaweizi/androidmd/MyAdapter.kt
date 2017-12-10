@@ -13,7 +13,17 @@ import com.chad.library.adapter.base.BaseViewHolder
  *     desc   :
  * </pre>
  */
-class MyAdapter(layoutResId: Int) : BaseQuickAdapter<WeaponBean, BaseViewHolder>(layoutResId) {
+class MyAdapter(layoutResId: Int) : BaseQuickAdapter<WeaponBean, BaseViewHolder>(layoutResId), IItemHelper{
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        val prev = mData.removeAt(fromPosition)
+        mData.add(if (toPosition > fromPosition) toPosition - 1 else toPosition, prev)
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        mData.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
     constructor() : this(layoutResId = R.layout.item_weapon_info)
 
@@ -22,4 +32,9 @@ class MyAdapter(layoutResId: Int) : BaseQuickAdapter<WeaponBean, BaseViewHolder>
         helper.setText(R.id.tv_weapon_name, item!!.name)
     }
 
+}
+
+interface IItemHelper {
+    fun onItemMove(fromPosition: Int, toPosition: Int)
+    fun onItemDismiss(position: Int)
 }

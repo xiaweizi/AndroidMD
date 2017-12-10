@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -17,10 +18,13 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.chad.library.adapter.base.listener.OnItemLongClickListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -69,7 +73,8 @@ class MainActivity : AppCompatActivity() {
                 R.string.open, R.string.close)
         mToggle!!.syncState()
         mDrawerLayout.addDrawerListener(mToggle!!)
-
+        val mItemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback())
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView)
     }
 
     private fun initListener() {
@@ -83,13 +88,6 @@ class MainActivity : AppCompatActivity() {
                     Log.i("itemTouch", adapter.data[position].toString())
                 }
             }
-        })
-        mRecyclerView.addOnItemTouchListener(object : OnItemLongClickListener() {
-            override fun onSimpleItemLongClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-                Toast.makeText(this@MainActivity, "删除", Toast.LENGTH_SHORT)
-                adapter!!.notifyItemRemoved(position)
-            }
-
         })
         myAdapter!!.setOnLoadMoreListener {
             getData(2)
@@ -221,5 +219,22 @@ class MainActivity : AppCompatActivity() {
     private fun gridHorizontal() {
         myAdapter!!.openLoadAnimation(BaseQuickAdapter.SCALEIN)
         mRecyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.HORIZONTAL, false)
+    }
+
+    internal inner class ItemTouchHelperCallback : ItemTouchHelper.Callback() {
+        override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+            val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
+            val swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
+            return makeMovementFlags(dragFlags, swipeFlags)
+        }
+
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+            myAdapter!!.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            myAdapter!!.onItemDismiss(viewHolder.adapterPosition)
+        }
     }
 }
