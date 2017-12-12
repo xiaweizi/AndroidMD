@@ -1,9 +1,11 @@
 package com.xiaweizi.androidmd
 
+import android.R.id
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.transition.Explode
+import android.view.MenuItem
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
@@ -32,18 +34,41 @@ class WeaponDetailActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
         // 透明状态栏
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        // 设置转场动画
         window.enterTransition = Explode()
         setContentView(R.layout.activity_weapon_detail)
-        mIvDetail = findViewById(R.id.iv_weapon_detail)
-        mTvDetail = findViewById(R.id.tv_weapon_detail)
-        mTbName = findViewById(R.id.tb_weapon_name)
+        initView()
+        setSupportActionBar(mTbName)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        initData()
+
+    }
+
+    /**
+     * 初始化数据
+     */
+    private fun initData() {
         mBean = intent.getParcelableExtra(Constants.EXTRA_WEAPON_BEAN)
         Glide.with(this).load(mBean.imageUrl).into(mIvDetail)
         mTvDetail.text = mBean.content
         mTbName.title = mBean.name
-        setSupportActionBar(mTbName)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
+    /**
+     * 初始化 view
+     */
+    private fun initView() {
+        mIvDetail = findViewById(R.id.iv_weapon_detail)
+        mTvDetail = findViewById(R.id.tv_weapon_detail)
+        mTbName = findViewById(R.id.tb_weapon_name)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId === id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
