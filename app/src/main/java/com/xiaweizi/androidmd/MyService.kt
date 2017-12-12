@@ -13,6 +13,6 @@ import retrofit2.http.GET
  * </pre>
  */
 interface MyService {
-    @get:GET("/weaponInfo/")
+    @get:GET("/weaponInfo")
     val weaponInfo: Observable<WeaponModelnfo>
 }

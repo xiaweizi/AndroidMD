@@ -52,7 +52,7 @@ class WeaponDetailActivity : AppCompatActivity() {
         mBean = intent.getParcelableExtra(Constants.EXTRA_WEAPON_BEAN)
         Glide.with(this).load(mBean.imageUrl).into(mIvDetail)
         mTvDetail.text = mBean.content
-        mTbName.title = mBean.name
+        mTbName.title = mBean.symbol
     }
 
     /**

@@ -12,9 +12,10 @@ import android.os.Parcelable
  *     desc   : 获取武器信息的 bean 和 modelInfo
  * </pre>
  */
-data class WeaponBean(var id: Int, var name: String, var content: String, var imageUrl: String) : Parcelable {
+data class WeaponBean(var id: Int, var name: String, var content: String, var imageUrl: String, var symbol: String) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString()) {
@@ -25,6 +26,7 @@ data class WeaponBean(var id: Int, var name: String, var content: String, var im
         parcel.writeString(name)
         parcel.writeString(content)
         parcel.writeString(imageUrl)
+        parcel.writeString(symbol)
     }
 
     override fun describeContents(): Int {
