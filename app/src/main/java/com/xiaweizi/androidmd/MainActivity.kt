@@ -3,6 +3,7 @@ package com.xiaweizi.androidmd
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
 import android.support.v4.widget.SwipeRefreshLayout
@@ -14,12 +15,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
@@ -104,6 +108,40 @@ class MainActivity : AppCompatActivity() {
         myAdapter!!.setOnLoadMoreListener {
             getData(2)
         }
+
+        // 左侧侧滑菜单选择事件
+        nv_left!!.setCheckedItem(R.id.nav_news)
+        nv_left!!.setNavigationItemSelectedListener { item ->
+            nv_left!!.setCheckedItem(item.itemId)
+            dl_main!!.closeDrawers()
+            when (item.itemId) {
+                R.id.nav_duanzi -> openBottomSheetDialog()
+            }
+            false
+        }
+    }
+
+    /**
+     * 打开 bottomSheetDialog 对话框
+     */
+    private fun openBottomSheetDialog() {
+        val parent = LinearLayout(this)
+        parent.orientation = LinearLayout.VERTICAL
+        val  title = TextView(this)
+        title.text = "枪械简介"
+        title.textSize = 20f
+        title.setPadding(15,15,15, 0)
+        parent.addView(title)
+
+        val recyclerView = RecyclerView(this)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.adapter = myAdapter
+        parent.addView(recyclerView)
+
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(parent)
+        dialog.show()
+
     }
 
     /**
