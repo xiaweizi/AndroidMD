@@ -119,6 +119,9 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
+        fab.setOnClickListener{
+            Toast.makeText(this, "点击 FloatActionButton...", Toast.LENGTH_SHORT).show()
+        }
     }
 
     /**
