@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
 
+    <!-- 主内容 -->
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -58,19 +59,18 @@
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
             app:fabSize="normal"
-            android:src="@drawable/ic_action_add"/>
+            android:src="@drawable/ic_action_arrow_up"/>
 
     </android.support.design.widget.CoordinatorLayout>
 
+    <!-- 侧滑菜单内容 -->
     <android.support.design.widget.NavigationView
         android:id="@+id/nv_left"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu">
-
-    </android.support.design.widget.NavigationView>
+        app:menu="@menu/nav_menu"/>
 
 
 </android.support.v4.widget.DrawerLayout>

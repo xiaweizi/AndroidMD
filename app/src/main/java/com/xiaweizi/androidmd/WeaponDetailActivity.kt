@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.transition.Explode
+import android.transition.Slide
 import android.view.MenuItem
 import android.view.Window
 import android.view.WindowManager
@@ -35,14 +36,13 @@ class WeaponDetailActivity : AppCompatActivity() {
         // 透明状态栏
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         // 设置转场动画
-        window.enterTransition = Explode()
+        window.enterTransition = Explode().setDuration(2000)
+        window.exitTransition = Slide().setDuration(2000)
         setContentView(R.layout.activity_weapon_detail)
         initView()
         setSupportActionBar(mTbName)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
         initData()
-
     }
 
     /**

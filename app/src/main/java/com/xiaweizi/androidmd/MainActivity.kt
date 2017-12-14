@@ -1,13 +1,16 @@
 package com.xiaweizi.androidmd
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -25,9 +28,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                     val weaponBean = adapter.data[position]
                     val intent = Intent(this@MainActivity, WeaponDetailActivity::class.java)
                     intent.putExtra(Constants.EXTRA_WEAPON_BEAN, weaponBean)
-                    startActivity(intent)
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this@MainActivity).toBundle())
                 }
             }
         })
@@ -116,11 +116,21 @@ class MainActivity : AppCompatActivity() {
             dl_main!!.closeDrawers()
             when (item.itemId) {
                 R.id.nav_duanzi -> openBottomSheetDialog()
+                R.id.nav_today_of_history -> {
+                    Snackbar.make(fab, "弹出 SnackBar", Snackbar.LENGTH_SHORT).setAction("Cancel") {
+                        Toast.makeText(this@MainActivity, "cancel this action", Toast.LENGTH_SHORT).show()
+                    }.show()
+                }
+                R.id.nav_robot -> {
+                    AlertDialog.Builder(this).setTitle("title").setMessage("message").setNegativeButton("确认", null)
+                            .setPositiveButton("取消", null).show()
+                }
             }
             false
         }
-        fab.setOnClickListener{
-            Toast.makeText(this, "点击 FloatActionButton...", Toast.LENGTH_SHORT).show()
+        fab.setOnClickListener {
+            // 滑动到第一个界面
+            mRecyclerView.smoothScrollToPosition(0)
         }
     }
 
@@ -130,10 +140,10 @@ class MainActivity : AppCompatActivity() {
     private fun openBottomSheetDialog() {
         val parent = LinearLayout(this)
         parent.orientation = LinearLayout.VERTICAL
-        val  title = TextView(this)
+        val title = TextView(this)
         title.text = "枪械简介"
         title.textSize = 20f
-        title.setPadding(15,15,15, 0)
+        title.setPadding(15, 15, 15, 0)
         parent.addView(title)
 
         val recyclerView = RecyclerView(this)
@@ -182,7 +192,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * 成功获取数据
      */
-    private fun setData(state: Int, it:WeaponModelnfo) {
+    private fun setData(state: Int, it: WeaponModelnfo) {
         when (state) {
             0 -> {
                 myAdapter!!.setNewData(it.data)
@@ -238,6 +248,7 @@ class MainActivity : AppCompatActivity() {
         myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
     }
+
     /**
      * 水平瀑布流
      */
@@ -245,20 +256,23 @@ class MainActivity : AppCompatActivity() {
         myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
         mRecyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL)
     }
+
     /**
      * 水平列表
      */
     private fun linearHorizontal() {
         myAdapter!!.openLoadAnimation(BaseQuickAdapter.SCALEIN)
-        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
+
     /**
      * 垂直列表
      */
     private fun linearVertical() {
         myAdapter!!.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
-        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
+
     /**
      * 水平宫格
      */
@@ -266,6 +280,7 @@ class MainActivity : AppCompatActivity() {
         myAdapter!!.openLoadAnimation(BaseQuickAdapter.SLIDEIN_RIGHT)
         mRecyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
     }
+
     /**
      * 垂直宫格
      */
