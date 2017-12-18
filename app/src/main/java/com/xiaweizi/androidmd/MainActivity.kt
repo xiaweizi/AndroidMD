@@ -75,14 +75,45 @@ class MainActivity : AppCompatActivity() {
             nv_left!!.setCheckedItem(item.itemId)
             dl_main!!.closeDrawers()
             when (item.itemId) {
-                R.id.nav_people_inc -> openBottomSheetDialog()
+                R.id.nav_weapon_inc -> {
+                    if (weaponFragment == null) {
+                        weaponFragment = WeaponFragment()
+                    }
+                    switchFragment(weaponFragment!!)
+                    navigation.selectedItemId = R.id.bottom_weapon_inc
+                }
+                R.id.nav_people_inc -> {
+                    if (peopleFragment == null) {
+                        peopleFragment = TestFragment.getInstance(getString(R.string.people_inc))
+                    }
+                    switchFragment(peopleFragment!!)
+                    navigation.selectedItemId = R.id.bottom_people_inc
+                }
                 R.id.nav_sub_inc -> {
+                    if (subFragment == null) {
+                        subFragment = TestFragment.getInstance(getString(R.string.sub_inc))
+                    }
+                    switchFragment(subFragment!!)
+                    navigation.selectedItemId = R.id.bottom_sub_inc
+                }
+                R.id.nav_things_inc -> {
+                    if (thingsFragment == null) {
+                        thingsFragment = TestFragment.getInstance(getString(R.string.thing_inc))
+                    }
+                    switchFragment(thingsFragment!!)
+                    navigation.selectedItemId = R.id.bottom_things_inc
+                }
+
+                R.id.nav_bottom_dialog -> {
+
+                }
+                R.id.nav_snack_bar -> {
                     // 弹出 SnackBar 和 Toast
                     Snackbar.make(weaponFragment!!.mFloatButton, "弹出 SnackBar", Snackbar.LENGTH_SHORT).setAction("Cancel") {
                         Toast.makeText(this@MainActivity, "Cancel this action", Toast.LENGTH_SHORT).show()
                     }.show()
                 }
-                R.id.nav_things_inc -> {
+                R.id.nav_alert_dialog -> {
                     // 弹出 AlertDialog
                     AlertDialog.Builder(this).setTitle("title").setMessage("message").setNegativeButton("确认", null)
                             .setPositiveButton("取消", null).show()
@@ -99,24 +130,28 @@ class MainActivity : AppCompatActivity() {
                         weaponFragment = WeaponFragment()
                     }
                     switchFragment(weaponFragment!!)
+                    nv_left.setCheckedItem(R.id.nav_weapon_inc)
                 }
                 R.id.bottom_people_inc -> {
                     if (peopleFragment == null) {
                         peopleFragment = TestFragment.getInstance(getString(R.string.people_inc))
                     }
                     switchFragment(peopleFragment!!)
+                    nv_left.setCheckedItem(R.id.nav_people_inc)
                 }
                 R.id.bottom_sub_inc -> {
                     if (subFragment == null) {
                         subFragment = TestFragment.getInstance(getString(R.string.sub_inc))
                     }
                     switchFragment(subFragment!!)
+                    nv_left.setCheckedItem(R.id.nav_sub_inc)
                 }
                 R.id.bottom_things_inc -> {
                     if (thingsFragment == null) {
                         thingsFragment = TestFragment.getInstance(getString(R.string.thing_inc))
                     }
                     switchFragment(thingsFragment!!)
+                    nv_left.setCheckedItem(R.id.nav_things_inc)
                 }
             }
             true
