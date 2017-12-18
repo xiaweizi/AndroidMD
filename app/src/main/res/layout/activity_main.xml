@@ -27,7 +27,7 @@
                 android:background="?attr/colorPrimary"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                 app:popupTheme="@style/Theme.AppCompat.Light"
                 app:title="枪械简介" />
         </android.support.design.widget.AppBarLayout>

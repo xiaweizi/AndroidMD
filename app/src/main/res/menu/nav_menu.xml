@@ -6,19 +6,19 @@
                 <item
                     android:id="@+id/nav_news"
                     android:icon="@drawable/about"
-                    android:title="枪械简介" />
+                    android:title="@string/weapon_inc" />
                 <item
                     android:id="@+id/nav_duanzi"
                     android:icon="@drawable/joke"
-                    android:title="人物简介" />
+                    android:title="@string/people_inc" />
                 <item
                     android:id="@+id/nav_today_of_history"
                     android:icon="@drawable/news"
-                    android:title="配件简介" />
+                    android:title="@string/sub_inc" />
                 <item
                     android:id="@+id/nav_robot"
                     android:icon="@drawable/robot"
-                    android:title="空投简介" />
+                    android:title="@string/thing_inc" />
             </group>
         </menu>
 

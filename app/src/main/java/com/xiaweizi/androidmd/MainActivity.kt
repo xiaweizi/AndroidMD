@@ -29,7 +29,15 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-
+/**
+ * <pre>
+ *     author : xiaweizi
+ *     class  : com.xiaweizi.androidmd.MainActivity
+ *     e-mail : 1012126908@qq.com
+ *     time   : 2017/12/10
+ *     desc   : 主界面
+ * </pre>
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mIvHead: ImageView
@@ -117,11 +125,13 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_duanzi -> openBottomSheetDialog()
                 R.id.nav_today_of_history -> {
+                    // 弹出 SnackBar 和 Toast
                     Snackbar.make(fab, "弹出 SnackBar", Snackbar.LENGTH_SHORT).setAction("Cancel") {
-                        Toast.makeText(this@MainActivity, "cancel this action", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Cancel this action", Toast.LENGTH_SHORT).show()
                     }.show()
                 }
                 R.id.nav_robot -> {
+                    // 弹出 AlertDialog
                     AlertDialog.Builder(this).setTitle("title").setMessage("message").setNegativeButton("确认", null)
                             .setPositiveButton("取消", null).show()
                 }
@@ -170,7 +180,7 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    var status = it.status
+                    val status = it.status
                     if (status == 0) {
                         setData(state, it)
                     } else {

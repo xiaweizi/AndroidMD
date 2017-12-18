@@ -8,4 +8,8 @@
     <string name="gridvertical">gridVertical</string>
     <string name="staggeredhorizontal">staggeredHorizontal</string>
     <string name="staggeredvertical">staggeredVertical</string>
+    <string name="weapon_inc">枪械简介</string>
+    <string name="people_inc">人物简介</string>
+    <string name="sub_inc">配件简介</string>
+    <string name="thing_inc">空投简介</string>
 </resources>

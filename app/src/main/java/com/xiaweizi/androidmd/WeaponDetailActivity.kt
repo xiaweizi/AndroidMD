@@ -65,7 +65,7 @@ class WeaponDetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId === id.home) {
+        if (item?.itemId == id.home) {
             finish()
         }
         return super.onOptionsItemSelected(item)
