@@ -14,9 +14,11 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.transition.Explode
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         setContentView(R.layout.activity_main)
         initView()
         initData()
@@ -106,6 +109,7 @@ class MainActivity : AppCompatActivity() {
         mRecyclerView.addOnItemTouchListener(object : OnItemClickListener() {
             override fun onSimpleItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
                 if (adapter is MyAdapter) {
+                    window.exitTransition = Explode()
                     val weaponBean = adapter.data[position]
                     val intent = Intent(this@MainActivity, WeaponDetailActivity::class.java)
                     intent.putExtra(Constants.EXTRA_WEAPON_BEAN, weaponBean)

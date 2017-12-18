@@ -36,8 +36,8 @@ class WeaponDetailActivity : AppCompatActivity() {
         // 透明状态栏
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         // 设置转场动画
-        window.enterTransition = Explode().setDuration(2000)
-        window.exitTransition = Slide().setDuration(2000)
+        window.enterTransition = Explode()
+        window.exitTransition = Slide()
         setContentView(R.layout.activity_weapon_detail)
         initView()
         setSupportActionBar(mTbName)
