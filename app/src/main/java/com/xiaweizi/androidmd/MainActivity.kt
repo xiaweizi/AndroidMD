@@ -122,19 +122,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 左侧侧滑菜单选择事件
-        nv_left!!.setCheckedItem(R.id.nav_news)
+        nv_left!!.setCheckedItem(R.id.nav_weapon_inc)
         nv_left!!.setNavigationItemSelectedListener { item ->
             nv_left!!.setCheckedItem(item.itemId)
             dl_main!!.closeDrawers()
             when (item.itemId) {
-                R.id.nav_duanzi -> openBottomSheetDialog()
-                R.id.nav_today_of_history -> {
+                R.id.nav_people_inc -> openBottomSheetDialog()
+                R.id.nav_sub_inc -> {
                     // 弹出 SnackBar 和 Toast
                     Snackbar.make(fab, "弹出 SnackBar", Snackbar.LENGTH_SHORT).setAction("Cancel") {
                         Toast.makeText(this@MainActivity, "Cancel this action", Toast.LENGTH_SHORT).show()
                     }.show()
                 }
-                R.id.nav_robot -> {
+                R.id.nav_things_inc -> {
                     // 弹出 AlertDialog
                     AlertDialog.Builder(this).setTitle("title").setMessage("message").setNegativeButton("确认", null)
                             .setPositiveButton("取消", null).show()

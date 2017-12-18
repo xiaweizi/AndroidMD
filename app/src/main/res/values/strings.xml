@@ -12,4 +12,9 @@
     <string name="people_inc">人物简介</string>
     <string name="sub_inc">配件简介</string>
     <string name="thing_inc">空投简介</string>
+    <string name="bottomsheetdialog">BottomSheetDialog</string>
+    <string name="snackbar_toast">SnackBar+Toast</string>
+    <string name="alert_dialog">AlertDialog</string>
+    <string name="other_title">攻略</string>
+    <string name="inc_title">简介</string>
 </resources>
