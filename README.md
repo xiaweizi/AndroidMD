@@ -426,4 +426,4 @@
 ![personal.gif](http://upload-images.jianshu.io/upload_images/4043475-4431f1f722e17eb2.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-> 严格按照`Material Design`风格进行开发，相信一定能开发出非常漂亮的`APP`！
+> 严格按照`Material Design`风格进行开发，相信一定能开发出非常漂亮的`APP`！！
